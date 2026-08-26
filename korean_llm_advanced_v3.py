@@ -899,7 +899,7 @@ class TrainingConfig:
     warmup_steps: int = 200
     checkpoint_interval: int = 100
     eval_interval: int = 500
-    max_seq_len: int = 512
+    max_seq_len: int = 256
     num_workers: int = 4
     use_bfloat16: bool = True
     seed: int = 42
