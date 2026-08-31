@@ -509,3 +509,525 @@ the Free Software Foundation, either version 3 of the License, or
 [⬆ 위로](#korean-llm-advanced-v3)
 
 </div>
+
+---
+
+# 🇺🇸 Korean LLM Advanced v3
+
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-brightgreen)](https://www.python.org/downloads/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C)](https://pytorch.org)
+[![CUDA](https://img.shields.io/badge/CUDA-11.8%2B-76B900)](https://developer.nvidia.com/cuda-toolkit)
+[![Model Size](https://img.shields.io/badge/Model-1.09B%20Parameters-orange)](#model-specifications)
+[![VRAM](https://img.shields.io/badge/VRAM%20Usage-9GB-red)](#optimization-techniques)
+
+<div align="center">
+
+**Korean-Optimized Large Language Model - Scratch Implementation & Quantization Applied**
+
+## 🚀 Project Development Journey
+At first, free API quotas became tight, and there was a limit to "vibe coding." I tried running Ollama locally, but the models were too heavy for my computer to handle. Then suddenly, the thought struck me: "Why not just build it myself?"
+
+However, I was only in 8th grade and knew almost nothing about AI models except the concept of 'B (Billion)' for model size. I couldn't code advanced concepts, only the basics.
+
+So, as usual, I went into ChatGPT and boldly declared: "I want to create my own independent Korean LLM model!" and started this ambitious challenge.
+
+While receiving help from GPT, I kept hitting limitations. Initially, I just collected code snippets from GPT and desperately hoped to avoid Dimension Errors. I spent entire days collecting and cleaning data, staring at my computer monitor.
+
+The first version of my work (pre-v1) was an ultra-lightweight 50M (50 million parameter) model trained on Wikipedia data—it no longer exists. Although proper conversation was impossible, it did show signs of constructing grammatically correct sentences. I was so happy with that small success that I became obsessed with creating a "chatbot-type model." This led me to develop v1 to its final version: a 541M-sized model. Despite some bugs, I decided to fix them and immediately scale up the model.
+
+After fixing errors and roughly doubling the model size, I finally built a 1.09B (1.09 billion parameter) model. Throughout the vacation, I kept my computer running for training whenever I had time.
+
+Before I knew it, the seemingly endless training had reached 44,000 steps. With excitement, I typed "안녕?" (Hello?) into the chat for testing.
+
+"안녕하세요! 오늘은 무엇을 도와드릴까요?" (Hello! What can I help you with today?)
+
+The moment the model displayed the correct response on screen, I felt indescribable joy.
+
+But joy was short-lived. As I asked different questions, it started spitting out completely wrong answers. After analyzing code with AI all night, I discovered a critical bug: the model was ignoring user instructions. Heartbroken, I bravely discarded all training results for a more perfect model.
+
+Without losing hope, I completely fixed v2's bugs and tackled the next challenge. A 1B-class model consumed a whopping 23GB of VRAM, making it too heavy to run in typical environments. I set a goal to reduce this to 10GB or less, and finally succeeded with quantization in v3.
+
+As vacation ended, it became difficult for me to keep training. I haven't done any training since the v2 bug fix, and I'll resume when time allows. This project is my life's greatest work, completed solely through sheer stubbornness to build an LLM with my own hands.
+
+Please use this model well, and if you like it, don't forget to click the star button (⭐)! Thank you!
+
+A **1.09B parameter LLM** trained entirely in Korean from scratch, making aggressive use of VRAM optimization techniques.
+
+[📋 Key Features](#key-features) • [🚀 Quick Start](#quick-start) • [💾 Technology Stack](#technology-stack) • [📊 Version History](#version-history)
+
+</div>
+
+---
+
+## 📖 Overview
+
+**Korean LLM Advanced v3** is a **lightweight large language model** optimized for Korean natural language processing.
+It is designed to train and perform inference efficiently even in limited GPU memory environments.
+
+### Core Goals
+- ✅ Korean text generation and comprehension
+- ✅ VRAM efficiency (9GB baseline)
+- ✅ Fast training speed
+- ✅ Easy deployment and utilization
+
+---
+
+## 🌟 Key Features
+
+### 🎯 Model Architecture
+| Item | Description |
+|------|------|
+| **Model Size** | 1.09B Parameters |
+| **Hidden Dimension** | 1,920 |
+| **Number of Layers** | 20 |
+| **Attention Heads** | 10 |
+| **Max Sequence Length** | 2,048 Tokens |
+| **Vocabulary Size** | Dynamic (based on tokenizer) |
+
+### 🔧 Optimization Techniques
+
+#### 1️⃣ **BF16 Automatic Mixed Precision**
+```
+~50% VRAM savings compared to standard FP32
+- Memory efficiency: ⬇️ 12GB → 6GB
+- Computation speed: ➡️ Equivalent or improved
+```
+
+#### 2️⃣ **8-bit AdamW Optimizer** (bitsandbytes)
+```
+75% reduction in optimizer state memory
+- Standard AdamW: ~2.2GB (1B model)
+- 8-bit AdamW: ~0.55GB (1B model)
+```
+
+#### 3️⃣ **Quantization** ⭐
+```
+Dynamic quantization of model weights
+- INT8 Quantization: 4x size reduction
+- Inference speed: 1.5~2x improvement
+```
+
+#### 4️⃣ **Gradient Accumulation**
+```
+Effective batch size increase
+- Configuration: batch_size=2, accumulation_steps=8
+- Effect: Equivalent to batch size 16
+```
+
+#### 5️⃣ **Gradient Checkpointing**
+```
+Activation memory reduction
+- Recomputation cost: ~30% speed decrease
+- Memory savings: 30~40%
+```
+
+---
+
+## 💾 VRAM Usage Comparison
+
+<div align="center">
+
+| Version | Parameters | VRAM Usage | Optimization Techniques |
+|------|---------|-----------|----------|
+| **v1** | 541M | ~11GB | Basic FP32 |
+| **v2** | ~1.1B | ~23GB | BF16 + Gradient Checkpoint |
+| **v3** | 1.09B | **~9GB** ✨ | BF16 + 8-bit Optimizer + Quantization |
+
+**v3 achieves 60% VRAM reduction compared to v2, with 2x model size expansion vs v1**
+
+</div>
+
+---
+
+## 🚀 Quick Start
+
+### 📋 Prerequisites
+
+```bash
+Python 3.9 or higher
+CUDA 11.8 or higher (GPU required)
+GPU Memory: Minimum 9GB recommended
+```
+
+### 1️⃣ Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/seoan1024/korean-llm-v3.git
+cd korean-llm-v3
+
+# Install essential packages
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install transformers datasets tqdm pandas matplotlib
+
+# Quantization support library (optional)
+pip install bitsandbytes
+```
+
+### 2️⃣ Dataset Preparation
+
+The code automatically downloads the following datasets:
+- 🔹 `nlpai-lab/kullm-v2` - Korean instruction-tuning data
+- 🔹 `beomi/KoAlpaca-v1.1a` - Korean Alpaca dataset
+
+```bash
+# Datasets are automatically downloaded, no separate action needed
+# Cache directory: ./datasets/cache/
+```
+
+### 3️⃣ Start Training
+
+```bash
+# Start training with default settings
+python korean_llm_advanced_v3.py
+
+# Or run with custom configuration
+python korean_llm_advanced_v3.py \
+    --batch-size 2 \
+    --max-steps 50000 \
+    --learning-rate 5e-5
+```
+
+### 4️⃣ Monitoring
+
+A GUI monitoring window automatically opens during training:
+- 📊 Real-time loss graph
+- 💬 Interactive chat (generation testing)
+- 📝 Log viewer
+
+---
+
+## 🏗️ Project Structure
+
+```
+korean-llm-v3/
+├── korean_llm_advanced_v3.py    # Main training script
+├── requirements.txt              # Dependency packages
+├── README.md                      # This file
+├── LICENSE                        # GPL-3.0 License
+│
+├── checkpoints/                   # Saved model checkpoints
+│   └── korean_llm_*.pth
+│
+├── datasets/                      # Dataset cache
+│   ├── cache/                     # Downloaded datasets
+│   └── datasets_manifest.json     # Metadata
+│
+└── logs/                          # Training logs and graphs
+    ├── training.log               # Detailed log
+    └── loss_history.json          # Loss history
+```
+
+---
+
+## 📊 Version History
+
+### v1 (Initial Version)
+- 541M parameter model
+- VRAM usage: ~11GB
+- Basic FP32 training
+
+### v2 (Optimization v1)
+- Expanded to 1.1B parameters
+- VRAM usage: ~23GB (1.2x initial increase)
+- **BF16 + Gradient Checkpoint** applied
+
+### **v3 (Current)** ⭐
+- 1.09B parameters (v2 level)
+- **VRAM usage: ~9GB** (60% reduction from v2!)
+- **Major Improvements:**
+  - 8-bit AdamW optimizer
+  - Dynamic quantization support
+  - Enhanced memory management
+  - Faster training speed
+
+---
+
+## 🔧 Technology Stack
+
+### Core Libraries
+
+| Library | Version | Purpose |
+|---------|---------|---------|
+| **PyTorch** | 2.0+ | Deep learning framework |
+| **Transformers** | 4.30+ | Tokenizer and utilities |
+| **Datasets** | 2.10+ | Korean dataset loading |
+| **bitsandbytes** | 0.40+ | 8-bit quantization optimization |
+| **tqdm** | 4.60+ | Progress display |
+
+### Optional Libraries
+
+| Library | Purpose |
+|---------|---------|
+| **matplotlib** | Loss graph visualization |
+| **tkinter** | GUI monitoring (built-in) |
+| **pandas** | Data processing |
+
+---
+
+## 💡 Usage Examples
+
+### Model Loading and Text Generation
+
+```python
+import torch
+from korean_llm_advanced_v3 import KoreanLLM, generate
+from transformers import AutoTokenizer
+
+# Load model and tokenizer
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = KoreanLLM(
+    vocab_size=50000,
+    dim=1920,
+    n_layers=20,
+    n_heads=10,
+    max_seq_len=2048
+).to(device)
+
+tokenizer = AutoTokenizer.from_pretrained("beomi/KoAlpaca-tokenizer")
+
+# Load checkpoint
+checkpoint = torch.load("checkpoints/korean_llm_50000.pth", map_location=device)
+model.load_state_dict(checkpoint['model_state_dict'])
+model.eval()
+
+# Generate text
+prompt = "인공지능이란"
+response = generate(
+    model, tokenizer, 
+    prompt=prompt,
+    max_tokens=100,
+    temperature=0.7,
+    top_p=0.95,
+    device=device
+)
+print(f"Q: {prompt}")
+print(f"A: {response}")
+```
+
+### Custom Training Configuration
+
+```python
+from korean_llm_advanced_v3 import TrainingConfig, main
+
+config = TrainingConfig(
+    batch_size=4,                      # Batch size
+    accumulation_steps=4,              # Gradient accumulation steps
+    max_steps=100000,                  # Maximum training steps
+    warmup_steps=1000,                 # Warmup steps
+    learning_rate=3e-5,                # Learning rate
+    eval_interval=5000,                # Evaluation interval
+    use_bfloat16=True,                 # Whether to use BF16
+    resume_from_checkpoint='latest'    # Resume from latest checkpoint
+)
+
+main(config)
+```
+
+---
+
+## ❓ FAQ (Frequently Asked Questions)
+
+### Q1: What if I only want to run inference?
+**A:** If you have a trained checkpoint, it's simple:
+```python
+import torch
+from korean_llm_advanced_v3 import KoreanLLM, generate
+from transformers import AutoTokenizer
+
+model = KoreanLLM(...).to(device)
+checkpoint = torch.load("checkpoints/korean_llm_50000.pth", map_location=device)
+model.load_state_dict(checkpoint['model_state_dict'])
+model.eval()
+
+response = generate(model, tokenizer, prompt="안녕?", max_tokens=50)
+```
+
+### Q2: What if my GPU memory is less than 9GB?
+**A:** Try these approaches:
+- Reduce batch size to `1`
+- Shorten sequence length to `1024`
+- Increase gradient accumulation steps to `16`
+- Enable 8-bit quantization
+
+### Q3: How do I resume training after interruption?
+**A:** It automatically detects the latest checkpoint:
+```python
+config = TrainingConfig(
+    resume_from_checkpoint='latest'  # Or specify a specific path
+)
+main(config)
+```
+
+### Q4: Can I use a different Korean dataset?
+**A:** Yes! Modify `DATASETS_CONFIG` in the `DatasetManager` class:
+```python
+DATASETS_CONFIG = [
+    {
+        "name": "your-dataset/path",
+        "split": "train",
+        "text_keys": ["input", "output"]
+    }
+]
+```
+
+### Q5: I get errors when running on Windows
+**A:** Try changing `num_workers` setting to `0`:
+```python
+loader = DataLoader(dataset, batch_size=2, num_workers=0)
+```
+
+### Q6: Can I reduce VRAM usage even more?
+**A:** Try combining these options:
+- **Memory Efficient Mode**: `use_bfloat16=True`
+- **Deeper Quantization**: INT4 (additional library required)
+- **LoRA Fine-tuning**: Train only selective layers
+
+### Q7: Generated text quality is low
+**A:** Check these:
+- Is the training step count sufficient? (Minimum 10,000 steps recommended)
+- Is the learning rate setting appropriate?
+- Is dataset quality good?
+- Adjust `temperature` parameter (0.5~1.0 recommended)
+
+### Q8: How do I convert the model to ONNX or other formats?
+**A:** Convert from PyTorch to ONNX:
+```python
+import torch.onnx
+
+dummy_input = torch.randint(0, 50000, (1, 2048)).to(device)
+torch.onnx.export(
+    model, dummy_input, "korean_llm.onnx",
+    input_names=['input_ids'],
+    output_names=['output']
+)
+```
+
+### Q9: Is the developer actively supporting this?
+**A:** Yes! Contact via email (**seoan102410@gmail.com**) for issues or feedback! 💌
+
+### Q10: Can I use this in commercial projects?
+**A:** It's under GPL-3.0 license, so you must disclose modifications. See the [LICENSE](./LICENSE) file for details.
+
+---
+
+## 🛠️ Troubleshooting
+
+### ❌ CUDA Out of Memory Error
+
+**Symptom:** `RuntimeError: CUDA out of memory`
+
+**Solution:**
+```python
+# Reduce batch size
+config.batch_size = 1
+
+# Reduce maximum sequence length
+config.max_seq_len = 1024
+
+# Increase gradient accumulation
+config.accumulation_steps = 16
+```
+
+### ❌ bitsandbytes Installation Failure
+
+**Solution:**
+```bash
+# Specify CUDA Toolkit path
+CUDA_HOME=/usr/local/cuda pip install bitsandbytes
+```
+
+### ❌ Dataset Download Failure
+
+**Solution:**
+```bash
+# Clear cache and retry
+rm -rf datasets/cache/*
+python korean_llm_advanced_v3.py
+```
+
+---
+
+## 📈 Performance Optimization Tips
+
+1. **Batch Size Adjustment**: Too small slows training, too large causes VRAM shortage
+2. **Gradient Accumulation**: Key to increasing effective batch size
+3. **Learning Rate Scheduling**: Cosine Annealing improves convergence
+4. **Mixed Precision**: BF16 improves both speed and memory
+5. **Checkpointing**: Regular saving enables training resumption
+
+---
+
+## 📞 Contact & Information
+
+- **Developer**: seoan1024
+- **Email**: seoan102410@gmail.com
+- **GitHub**: [seoan1024](https://github.com/seoan1024)
+
+---
+
+## 📜 License
+
+This project is distributed under **GPL-3.0 License**.
+
+```
+GNU GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
+
+Copyright (C) 2024 seoan1024
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+```
+
+📖 Full License: [LICENSE](./LICENSE)
+
+---
+
+## 🤝 Contributing
+
+Bug reports, feature suggestions, and pull requests are always welcome!
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 🙏 Acknowledgments
+
+- 🎯 **Korean LLM Community** - Valuable feedback and contributions
+- 📚 **Hugging Face** - Transformers & Datasets libraries
+- 🔧 **bitsandbytes** - Quantization and optimization solutions
+- 🚀 **PyTorch** - Open-source deep learning framework
+
+---
+
+## 📚 References
+
+### Korean NLP
+- [nlpai-lab/KULLM](https://github.com/nlpai-lab/KULLM)
+- [beomi/KoAlpaca](https://github.com/beomi/KoAlpaca)
+
+### Optimization Techniques
+- [bitsandbytes: 8-bit Optimization](https://github.com/TimDettmers/bitsandbytes)
+- [Gradient Checkpointing in PyTorch](https://pytorch.org/docs/stable/checkpoint.html)
+
+### Large Language Models
+- [Attention is All You Need (Transformer)](https://arxiv.org/abs/1706.03762)
+- [Language Models are Unsupervised Multitask Learners (GPT-2)](https://arxiv.org/abs/1901.08810)
+
+---
+
+<div align="center">
+
+**⭐ If this project was helpful, please click the star button!**
+
+[⬆ Back to Top](#korean-llm-advanced-v3)
+
+</div>
